@@ -12,9 +12,12 @@ import java.util.Map;
 
 public class TaxerDao {
     /**
-     * 根据username获取taxer对象
-     * @param username
-     * @return
+     * Get taxer taxer.
+     * tb_user 表中 taxerId 关联 tb_taxer 表中 id
+     * 根据tb_user 表中  username 获取 taxer 对象
+     *
+     * @param username the username
+     * @return the taxer
      */
     public  Taxer getTaxer(String username){
         UserDao userDao = new UserDao();
@@ -39,8 +42,10 @@ public class TaxerDao {
         return taxer;
     }
     /**
-     * 获取所有的taxer对象
-     * @return 所有的taxer对象
+     * Get taxers list.
+     * 返回一个集合
+     *
+     * @return the list
      */
     public  List<Taxer> getTaxers() {
         List<Map<String, String>> result = DBUtil.query("select * from tb_taxer ");
@@ -61,9 +66,11 @@ public class TaxerDao {
         return taxers;
     }
     /**
-     * 根据id获取taxer对象
-     * @param id 指定id
-     * @return taxer对象
+     * Get taxer by id taxer.
+     * 通过 id 查询 taxer（纳税人） 信息
+     *
+     * @param id the id
+     * @return the taxer
      */
     public  Taxer getTaxerById(Integer id) {
         Map<String, String> result = DBUtil.queryRow("select * from tb_taxer where id = ?", id);
@@ -81,11 +88,12 @@ public class TaxerDao {
 
 
     /**
-     * 返回查询办税专员的结果集
-     * @param pageNum 页
-     * @param pageSize 页面记录数
-     * @param taxerName
-     * @return 查询的结果
+     * Get search result list.
+     *      返回查询办税专员的结果集
+     * @param pageNum   the page num  页数
+     * @param pageSize  the page size  页面记录数
+     * @param taxerName the taxer name
+     * @return the list
      */
     public  List<Map<String, String>> getSearchResult(int pageNum,int pageSize,String taxerName){
         boolean checkName = taxerName!=null&&taxerName.toString().length()>0;
@@ -102,8 +110,6 @@ public class TaxerDao {
      * 获取查询的记录数
      * @param pageSize 页面记录数
      * @return 查询的办税专员记录数
-     */
-    /**
      */
     public  int getSearchRows(String taxerName){
         boolean checkName = taxerName!=null&&taxerName.toString().length()>0;
