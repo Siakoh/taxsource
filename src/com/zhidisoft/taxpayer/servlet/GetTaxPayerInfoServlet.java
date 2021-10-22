@@ -22,11 +22,13 @@ public class GetTaxPayerInfoServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        
         resp.setContentType("application/json;charset=UTF-8");
+        TaxerDao taxerDao = new TaxerDao();
         String id = req.getParameter("id");
         TaxPayer payer = TaxPayerDao.getPayer(id);
         req.setAttribute("payer",payer);
-        req.setAttribute("user", TaxerDao.getTaxerById(payer.getUserId()));
+        req.setAttribute("user", taxerDao.getTaxerById(payer.getUserId()));
         req.setAttribute("organ", TaxOrganDao.getOrgan(payer.getTaxOrganId()));
         req.setAttribute("industry", IndustryDao.getIndustry(payer.getIndustryId()));
         req.getRequestDispatcher("/manage/jsp/payerInfo.jsp").forward(req,resp);

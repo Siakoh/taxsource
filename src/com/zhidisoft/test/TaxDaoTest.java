@@ -8,7 +8,8 @@ public class TaxDaoTest {
 
     @Test
     public void test(){
-        Taxer taxerByUserId = TaxerDao.getTaxerByUserId(1);
+        TaxerDao taxerDao = new TaxerDao();
+        Taxer taxerByUserId = taxerDao.getTaxerByUserId(1);
 
         System.out.println(taxerByUserId);
     }

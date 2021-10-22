@@ -13,7 +13,7 @@ import java.util.Map;
 public class UserDao {
 //    private static Connection con = new  DBUtil().getConnection();
 
-    public static User selectName(String username,String password){
+    public  User selectName(String username,String password){
         String sql = "select id, username,password from tb_user where username=? and password=?";
         List<Map<String, String>> list = DBUtil.query(sql,username,password);
         User user = null;
@@ -29,7 +29,7 @@ public class UserDao {
      * @param username 指定username
      * @return 用户对象
      */
-    public static User getUser(String username){
+    public  User getUser(String username){
         Map<String, String> map = new HashMap<String, String>();
 
         List<Map<String, String>> list = DBUtil.query("select * from tb_user where username = ?", username);
@@ -50,7 +50,7 @@ public class UserDao {
      * @param id
      * @return
      */
-    public static User getUserById(Integer id){
+    public  User getUserById(Integer id){
         Map<String, String> result = DBUtil.queryRow("select * from tb_user where id = ?", id);
         User user = new User();
         try {
@@ -72,7 +72,7 @@ public class UserDao {
      * @param newPassword 新的密码
      * @return 是否修改成功
      */
-    public static boolean update(String username,String oldPassword,String newPassword){
+    public  boolean update(String username,String oldPassword,String newPassword){
         String uuid =null;
         String value = null;
         //通过username 拿到user对象属性

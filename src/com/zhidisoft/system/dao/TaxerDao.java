@@ -16,9 +16,10 @@ public class TaxerDao {
      * @param username
      * @return
      */
-    public static Taxer getTaxer(String username){
+    public  Taxer getTaxer(String username){
+        UserDao userDao = new UserDao();
         //通过username拿到用户
-        User user = UserDao.getUser(username);
+        User user = userDao.getUser(username);
         Integer taxerId = user.getTaxerId();
         //判断user对象是否为taxer
         if(taxerId==null){
@@ -41,7 +42,7 @@ public class TaxerDao {
      * 获取所有的taxer对象
      * @return 所有的taxer对象
      */
-    public static List<Taxer> getTaxers() {
+    public  List<Taxer> getTaxers() {
         List<Map<String, String>> result = DBUtil.query("select * from tb_taxer ");
         List<Taxer> taxers = new ArrayList<Taxer>();
         if(result!=null&&result.size()>0){
@@ -64,7 +65,7 @@ public class TaxerDao {
      * @param id 指定id
      * @return taxer对象
      */
-    public static Taxer getTaxerById(Integer id) {
+    public  Taxer getTaxerById(Integer id) {
         Map<String, String> result = DBUtil.queryRow("select * from tb_taxer where id = ?", id);
         Taxer taxer = new Taxer();
         try {
@@ -86,7 +87,7 @@ public class TaxerDao {
      * @param taxerName
      * @return 查询的结果
      */
-    public static List<Map<String, String>> getSearchResult(int pageNum,int pageSize,String taxerName){
+    public  List<Map<String, String>> getSearchResult(int pageNum,int pageSize,String taxerName){
         boolean checkName = taxerName!=null&&taxerName.toString().length()>0;
         String sql = "select * from tb_taxer where 1=1 ";
         if(checkName){
@@ -104,7 +105,7 @@ public class TaxerDao {
      */
     /**
      */
-    public static int getSearchRows(String taxerName){
+    public  int getSearchRows(String taxerName){
         boolean checkName = taxerName!=null&&taxerName.toString().length()>0;
         String sql = "select * from tb_taxer  where 1=1 ";
         if(checkName){
@@ -131,12 +132,12 @@ public class TaxerDao {
      * @param id 执行id
      * @return 是否更新成功
      */
-    public static boolean updateTaxer(Taxer taxer, Integer id) {
+    public  boolean updateTaxer(Taxer taxer, Integer id) {
         int rows = DBUtil.edit(taxer, "tb_taxer", id);
         return rows==1;
     }
 
-    public static Taxer getTaxerByUserId(Integer userId) {
+    public  Taxer getTaxerByUserId(Integer userId) {
         String sql = "select tt.* from tb_taxer  tt inner join tb_user tu  on tt.id = tu.taxerId where 1=1 ";
         sql += " and tu.id=?";
         Taxer taxer = new Taxer();

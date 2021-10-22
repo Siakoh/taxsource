@@ -25,18 +25,25 @@ public class UserLoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("application/json;charset=UTF-8");
 
+        // 设置 json 响应的数据
+        resp.setContentType("application/json;charset=UTF-8");
+        // 获取表单请求的参数
         String name = req.getParameter("username");
         String password = req.getParameter("password");
         String remUser = req.getParameter("remUser");
 
         JSONObject json = new JSONObject();
         PrintWriter out = resp.getWriter();
-
+        // 对密码进行加密
         String s = EncryptUtil.encryptMD5(password);
-        User user = UserDao.selectName(name,s);
-        Taxer taxer = TaxerDao.getTaxer(name);
+        // 通过用户名查询用户信息
+        UserDao userDao = new UserDao();
+        User user = userDao.selectName(name,s);
+        // 通过用户名查询纳税人信息
+        TaxerDao taxerDao = new TaxerDao();
+        Taxer taxer = taxerDao.getTaxer(name);
+        // 将 user 放入到 session 会话中
         HttpSession session = req.getSession();
         session.setAttribute("user",user);
 

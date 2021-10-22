@@ -28,7 +28,8 @@ public class TestAnother {
 //        System.out.println(to.getSearchRows("1004","小米科技"));
 //        System.out.println(to.getSearchResult(1,4,"1004","小米科技"));
 //        System.out.println(to.getTotalRows());
-        Taxer id = TaxerDao.getTaxerByUserId(3);
+        TaxerDao taxerDao = new TaxerDao();
+        Taxer id = taxerDao.getTaxerByUserId(3);
         System.out.println(id);
         TaxPayer payer = TaxPayerDao.getPayer("101");
         System.out.println(payer);

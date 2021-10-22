@@ -27,10 +27,10 @@ public class ToAddTaxPayerServlet extends HttpServlet {
         req.setAttribute("organs", TaxOrganDao.getOrgans());
         req.setAttribute("industrys", IndustryDao.getIndustrys());
 //		req.setAttribute("taxers", TaxerDao.getTaxers());//所有人
-
+        TaxerDao taxerDao = new TaxerDao();
         //当前管理员对应的税务人员
         User user = (User) req.getSession().getAttribute("user");
-        req.setAttribute("user", TaxerDao.getTaxerByUserId(user.getId()));
+        req.setAttribute("user", taxerDao.getTaxerByUserId(user.getId()));
         req.setAttribute("curDate", FormatDate.format(new Date()));
         req.getRequestDispatcher("/manage/jsp/addTaxPayer.jsp").forward(req,
                 resp);

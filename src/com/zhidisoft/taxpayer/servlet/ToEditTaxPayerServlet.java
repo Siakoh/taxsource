@@ -25,11 +25,12 @@ public class ToEditTaxPayerServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String id = req.getParameter("id");
         TaxPayer payer = TaxPayerDao.getPayer(id);
+        TaxerDao taxerDao = new TaxerDao();
         req.setAttribute("payer", payer);
 
         req.setAttribute("industry", IndustryDao.getIndustry(payer.getIndustryId()));
         req.setAttribute("organ", TaxOrganDao.getOrgan(payer.getTaxOrganId()));
-        req.setAttribute("user",TaxerDao.getTaxerByUserId(payer.getUserId()));
+        req.setAttribute("user",taxerDao.getTaxerByUserId(payer.getUserId()));
         req.setAttribute("organs",TaxOrganDao.getOrgans());
         req.setAttribute("industrys",IndustryDao.getIndustrys());
 
