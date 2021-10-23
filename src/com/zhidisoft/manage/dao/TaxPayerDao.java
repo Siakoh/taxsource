@@ -20,9 +20,6 @@ public class TaxPayerDao {
         return instance;
     }
 
-
-
-
     public List<TaxPayer> selectPayers(int pageNum, int size){
         ArrayList<TaxPayer> payers = new ArrayList<>();
         String sql = "select * from tb_tax_payer limit ?,?";

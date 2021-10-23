@@ -24,19 +24,7 @@ public class ListTaxPayerServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        int pageNum = Integer.parseInt(req.getParameter("pageNum"));
-//        int  size = Integer.parseInt(req.getParameter("size"));
-//        PrintWriter out = resp.getWriter();
-//
-//        TaxPayerDao taxPayerDao = new TaxPayerDao();
-//        List<TaxPayer> list = taxPayerDao.selectPayers(pageNum, size);
-//        Map<Object, Object> map = new HashMap<>();
-//        req.getSession().setAttribute("list",list);
-//        map.put("rows",list);
-//        map.put("tatal",taxPayerDao.count());
-//        out.write(JSONObject.fromObject(map).toString());
-//        out.flush();
-//        out.close();
+
         // 设置响应字符编码，类型，创建json对象
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json;charset=UTF-8");
