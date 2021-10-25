@@ -16,8 +16,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = "/getTaskInfoServlet.do")
-public class GetTaskInfoServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/toEditTaskServlet.do")
+public class ToEditTaskServlet extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doPost(req, resp);
@@ -25,26 +26,24 @@ public class GetTaskInfoServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        TaxerDao taxerDao = new TaxerDao();
+        UserDao userDao = new UserDao();
         String id = req.getParameter("id");
         TaxSource task = TaxSourceDao.getTask(Integer.parseInt(id));
         TaxPayer payer = TaxPayerDao.getPayer(task.getPayerId().toString());
-        UserDao userDao = new UserDao();
-        TaxerDao taxerDao = new TaxerDao();
         req.setAttribute("task", task);
         req.setAttribute("payer", payer);
         req.setAttribute("organ", TaxOrganDao.getOrgan(payer.getTaxOrganId()));
         req.setAttribute("industry",
                 IndustryDao.getIndustry(payer.getIndustryId()));
-        req.setAttribute("subOrgan", TaxOrganDao.getOrgan(task.getSubOrganId()));
+        req.setAttribute("subOrgan", TaxOrganDao.getOrgan(task.getSubOrganId()));//下达部门
         req.setAttribute("user", userDao.getUserById(payer.getUserId()));
         req.setAttribute("executeTaxer",
-                taxerDao.getTaxerById(task.getExecuteId()));
+                taxerDao.getTaxerById(task.getExecuteId()));	//执行人
         req.setAttribute("approverTaxer",
-                taxerDao.getTaxerById(task.getApproverId()));
-        req.setAttribute("taskUser",
-                userDao.getUserById(task.getRecordUserId()));
-        req.getRequestDispatcher("/manage/jsp/taskInfo.jsp").forward(req, resp);
-
+                taxerDao.getTaxerById(task.getApproverId()));//批准人
+        req.setAttribute("taxers", taxerDao.getTaxers());//所有人
+        req.setAttribute("organs", TaxOrganDao.getOrgans());//所有下达部门
+        req.getRequestDispatcher("/manage/jsp/editTask.jsp").forward(req, resp);
     }
 }
