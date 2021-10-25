@@ -57,7 +57,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        	   method:"POST",
        	   loadMsg:"数据加载中..",
        	   pagination:true,
-       	   striped:true,  
+       	   striped:true,
+           pageList: [2, 4, 6, 8],
+           pageSize: 4,
        	   columns:[[
        	   	  		{field:"payerCode","title":"纳税人识别号"},
                     {field:"payerName","title":"纳税人名称"},

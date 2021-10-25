@@ -1,6 +1,6 @@
-package com.zhidisoft.payer.servlet;
+package com.zhidisoft.taxer.servlet;
 
-import com.zhidisoft.manage.dao.TaxPayerDao;
+import com.zhidisoft.system.dao.TaxerDao;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -14,9 +14,8 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
-
-@WebServlet(urlPatterns = "/getStatisticalServlet.do")
-public class GetStatisticalServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/listTaxerServlet.do")
+public class ListTaxerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doPost(req, resp);
@@ -24,13 +23,16 @@ public class GetStatisticalServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("application/json; charset=UTF-8");
-
+        // 设置响应字符编码，类型，创建json对象
         resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json; charset=UTF-8");
         PrintWriter out = resp.getWriter();
         JSONObject json = new JSONObject();
-        TaxPayerDao taxPayerDao = new TaxPayerDao();
-        // 获取参数 pageNum, pageSize,totalPages
+        TaxerDao taxerDao = new TaxerDao();
+        // 获取参数 pageNum, pageSize,totalRows
+        /**
+         * easyUI传递过来的参数page，size 请求传输过去的数据total ，rows
+         */
         int pageNum = 1;
         if (req.getParameter("page") != null
                 && !req.getParameter("page").isEmpty()) {
@@ -41,17 +43,18 @@ public class GetStatisticalServlet extends HttpServlet {
                 && !req.getParameter("rows").isEmpty()) {
             pageSize = Integer.parseInt(req.getParameter("rows"));
         }
-        int totalRows = taxPayerDao.getTotalRows();
-        String payerName = req.getParameter("payerName");
-        String payerCode = req.getParameter("payerCode");
+
+        String taxerName = req.getParameter("taxerName");
         // 传递参数
-        json.put("total", totalRows);
-        List<Map<String, String>> result = TaxPayerDao.getStatistical(pageNum,
-                pageSize, payerCode, payerName);
+        List<Map<String, String>> result = taxerDao.getSearchResult(pageNum,
+                pageSize, taxerName);
         JSONArray jsonArray = new JSONArray();
         for (Map<String, String> map : result) {
             jsonArray.add(map);
         }
+
+        int totalRows = taxerDao.getSearchRows(taxerName);
+        json.put("total", totalRows);
         json.put("rows", jsonArray);
         out.print(json);
         out.flush();
