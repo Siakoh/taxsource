@@ -35,7 +35,7 @@ public class EditTaskServlet extends HttpServlet {
         HttpSession session = req.getSession();
         // 获取参数，建立对象
         TaxSource task = new TaxSource();
-        Integer id = Integer.valueOf(req.getParameter("id"));  //  NumberFormatException: null
+        Integer id = Integer.valueOf(req.getParameter("id"));      //  NumberFormatException: null
         task.setId(id);
         String payerId = req.getParameter("payerId");
         if (payerId == null || payerId.length() == 0) {

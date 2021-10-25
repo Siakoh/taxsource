@@ -147,6 +147,7 @@
                 pagination: true,
                 striped: true,
                 columns: [[
+                    {field: "id", "title": "任务序号"},
                     {field: "taskName", "title": "任务名称"},
                     {field: "payerCode", "title": "纳税人识别号"},
                     {field: "payerName", "title": "纳税人名称"},
