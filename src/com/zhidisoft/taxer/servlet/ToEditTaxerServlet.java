@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
-@WebServlet(urlPatterns = "/getTaxerInfoServlet.do")
-public class GetTaxerInfoServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/toEditTaxerServlet.do")
+public class ToEditTaxerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doPost(req, resp);
@@ -24,9 +24,10 @@ public class GetTaxerInfoServlet extends HttpServlet {
         String id = req.getParameter("id");
         TaxerDao taxerDao = new TaxerDao();
         Taxer taxer = taxerDao.getTaxerById(Integer.parseInt(id));
-        req.setAttribute("taxer", taxer);
-        req.setAttribute("organ", TaxOrganDao.getOrgan(taxer.getOrganId()));
-        req.getRequestDispatcher("/manage/jsp/taxerInfo.jsp")
-                .forward(req, resp);
+
+        req.setAttribute("taxer",taxer);
+        req.setAttribute("organs", TaxOrganDao.getOrgans());
+        req.getRequestDispatcher("/manage/jsp/editTaxer.jsp").forward(req,
+                resp);
     }
 }
