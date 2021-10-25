@@ -1,4 +1,4 @@
-package com.zhidisoft.taxpayer.servlet;
+package com.zhidisoft.payer.servlet;
 
 import com.zhidisoft.manage.dao.TaxPayerDao;
 import com.zhidisoft.manage.entity.TaxPayer;
@@ -15,8 +15,10 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
-@WebServlet("/addTaxPayerServlet.do")
-public class AddTaxPayerServlet extends HttpServlet {
+
+
+@WebServlet(urlPatterns = "/editTaxPayerServlet.do")
+public class EditTaxPayerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
@@ -32,8 +34,10 @@ public class AddTaxPayerServlet extends HttpServlet {
         PrintWriter out = resp.getWriter();
         JSONObject json = new JSONObject();
         HttpSession session = req.getSession();
-        // 建立对象，获取和设置参数，对于和外键相连的字段判断是否有选择
+        // 建立对象，获取和设置参数
         TaxPayer payer = new TaxPayer();
+        String id = req.getParameter("id");
+        payer.setId(Integer.parseInt(id));
         String payerCode = req.getParameter("payerCode");
         payer.setPayerCode(payerCode);
         String payerName = req.getParameter("payerName");
@@ -46,20 +50,12 @@ public class AddTaxPayerServlet extends HttpServlet {
         } else {
             payer.setTaxOrganId(Integer.parseInt(taxOrganId));
         }
-
         String industryId = req.getParameter("industryId");
         if ("-1".equals(industryId)) {
             payer.setIndustryId(null);
         } else {
             payer.setIndustryId(Integer.parseInt(industryId));
         }
-        //办税专员添加
-//		String industryId = req.getParameter("industryId");
-//		if ("-1".equals(industryId)) {
-//			payer.setIndustryId(null);
-//		} else {
-//			payer.setIndustryId(Integer.parseInt(industryId));
-//		}
         String bizScope = req.getParameter("bizScope");
         payer.setBizScope(bizScope);
         String invoiceType = req.getParameter("invoiceType");
@@ -68,14 +64,10 @@ public class AddTaxPayerServlet extends HttpServlet {
         payer.setLegalPerson(legalPerson);
         String legalIdCard = req.getParameter("legalIdCard");
         payer.setLegalIdCard(legalIdCard);
-        String legalIdCardImageURL = req.getParameter("legalIdCardImageURL");
-        payer.setLegalIdCardImageURL(legalIdCardImageURL);
         String finaceName = req.getParameter("finaceName");
         payer.setFinaceName(finaceName);
         String finaceIdCard = req.getParameter("finaceIdCard");
         payer.setFinaceIdCard(finaceIdCard);
-        String finaceIdCardImageURL = req.getParameter("finaceIdCardImageURL");
-        payer.setFinaceIdCardImageURL(finaceIdCardImageURL);
         String taxerName = req.getParameter("taxerName");
         payer.setTaxerName(taxerName);
         String bizAddressPhone = req.getParameter("bizAddressPhone");
@@ -85,18 +77,16 @@ public class AddTaxPayerServlet extends HttpServlet {
         User user = (User) session.getAttribute("user");
         payer.setUserId(user.getId());
         // 保存
-        TaxPayerDao tpd = new TaxPayerDao();
-        boolean b = tpd.addPayer(payer);
+        boolean b = TaxPayerDao.updatePayer(payer, Integer.parseInt(id));
         if (b) {
             json.put("success", true);
-            json.put("msg", "添加成功");
+            json.put("msg", "保存成功");
         } else {
             json.put("success", false);
-            json.put("msg", "添加失败");
+            json.put("msg", "保存失败");
         }
         out.print(json);
         out.flush();
         out.close();
     }
-
 }
