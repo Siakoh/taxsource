@@ -98,13 +98,13 @@ public class UserDao {
             value = result.get(0).get("password");
         }
         //密码uuid必须不能都是数字，加密
-        String value1 = EncryptUtil.encryptMD5(oldPassword + uuid);
+        String value1 = EncryptUtil.encryptMD5(oldPassword);
         //判断用户密码是否正确
         if (!value1.equals(value)) {
             return false;
         }
         //对新密码加密
-        String password = EncryptUtil.encryptMD5(newPassword + uuid);
+        String password = EncryptUtil.encryptMD5(newPassword);
         boolean row = DBUtil.update("update tb_user set password=? where username =?", password, username);
         return row;
     }
