@@ -9,7 +9,7 @@ public class TaxSource {
     private Integer subOrganId;
     private Integer approverId;
     private Integer executeId;
-    private Date executeTime;
+    private String executeTime;
     private String taskFrom;
     private String taskState;
     private String idea;
@@ -21,7 +21,7 @@ public class TaxSource {
     public TaxSource() {
     }
 
-    public TaxSource(Integer id, Integer payerId, String taskName, Integer subOrganId, Integer approverId, Integer executeId, Date executeTime, String taskFrom,
+    public TaxSource(Integer id, Integer payerId, String taskName, Integer subOrganId, Integer approverId, Integer executeId, String executeTime, String taskFrom,
                      String taskState, String idea, Integer riskLevel, String recordTaskDate, Integer recordUserId, Integer removeState) {
         this.id = id;
         this.payerId = payerId;
@@ -88,11 +88,11 @@ public class TaxSource {
         this.executeId = executeId;
     }
 
-    public Date getExecuteTime() {
+    public String getExecuteTime() {
         return executeTime;
     }
 
-    public void setExecuteTime(Date executeTime) {
+    public void setExecuteTime(String executeTime) {
         this.executeTime = executeTime;
     }
 

@@ -45,5 +45,7 @@ public class ToEditTaskServlet extends HttpServlet {
         req.setAttribute("taxers", taxerDao.getTaxers());//所有人
         req.setAttribute("organs", TaxOrganDao.getOrgans());//所有下达部门
         req.getRequestDispatcher("/manage/jsp/editTask.jsp").forward(req, resp);
+
+
     }
 }
