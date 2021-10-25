@@ -12,10 +12,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <meta name="viewport" content="width=device-width, initial-scale=1"> 
     <title>纳税人管理</title>
 
-    <link href="static/css/base.css" rel="stylesheet">
-    <link rel="stylesheet" href="static/easyui/uimaker/easyui.css">
-    <link rel="stylesheet" type="text/css" href="static/easyui/uimaker/icon.css">
-    <link rel="stylesheet" href="static/css/taxpayer.css">
+    <link href="../../static/css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../static/easyui/uimaker/easyui.css">
+    <link rel="stylesheet" type="text/css" href="../../static/easyui/uimaker/icon.css">
+    <link rel="stylesheet" href="../../static/css/taxpayer.css">
 
   </head>
   <body>
@@ -30,9 +30,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <a href="javascript:void(0);" id="setBtn1" class="easyui-linkbutton" iconCls="icon-reload">重置</a> 
       </div>
     </div>
-    <script type="text/javascript" src="static/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="static/easyui/jquery.easyui.min.js"></script>
-    <script type="text/javascript" src="static/easyui/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="../../static/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="../../static/easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="../../static/easyui/easyui-lang-zh_CN.js"></script>
     <script type="text/javascript">     
            //查询
        	   function doSearch(){     	   
