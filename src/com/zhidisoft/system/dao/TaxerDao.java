@@ -108,7 +108,7 @@ public class TaxerDao {
 
     /**
      * 获取查询的记录数
-     * @param pageSize 页面记录数
+     * @param taxerName 页面记录数
      * @return 查询的办税专员记录数
      */
     public  int getSearchRows(String taxerName){
@@ -159,4 +159,9 @@ public class TaxerDao {
         return taxer;
     }
 
+    public  boolean deleteTaxerById(Integer id){
+        String sql = "delete from tb_taxer where id = ?";
+        boolean update = DBUtil.update(sql, id);
+        return  update;
+    }
 }
