@@ -1,23 +1,23 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-  <head>
+<head>
     <base href="<%=basePath%>">
     <title>任务录入</title>
-    <link href="static/css/base.css" rel="stylesheet">
-    <link rel="stylesheet" href="static/easyui/uimaker/easyui.css">
-    <link rel="stylesheet" type="text/css" href="static/easyui/uimaker/icon.css">
-    <link href="static/css/edit.css" rel="stylesheet">
-  </head>
-  
-  <body>
-    <div class="container">
+    <link href="../../static/css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../static/easyui/uimaker/easyui.css">
+    <link rel="stylesheet" type="text/css" href="../../static/easyui/uimaker/icon.css">
+    <link href="../../static/css/edit.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="container">
     <div class="content">
         <div title="纳税人信息" data-options="closable:false" class="basic-info">
             <div class="column"><span class="current">纳税人基本信息</span></div>
@@ -76,13 +76,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <td class="kv-label">批准人</td>
                     <td class="kv-content"><label>${requestScope.approverTaxer.taxerName }</label></td>
                 </tr>
-               
+
                 <tr>
-                	<td class="kv-label">执行人</td>
+                    <td class="kv-label">执行人</td>
                     <td class="kv-content"><label>${requestScope.executeTaxer.taxerName }</label></td>
-                 	<td class="kv-label">执行时间</td>
+                    <td class="kv-label">执行时间</td>
                     <td class="kv-content"><label>${requestScope.task.executeTime }</label></td>
-                    
+
                     <td class="kv-label">任务执行情况</td>
                     <td class="kv-content">
                         <textarea rows="3" readonly style="width: 90%;">${requestScope.task.taskState }</textarea>
@@ -90,13 +90,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </tr>
                 </tbody>
             </table>
-                      
+
+        </div>
     </div>
-</div>
-  </body>
-  <script type="text/javascript" src="static/jquery/jquery.min.js"></script>
-<script type="text/javascript" src="static/easyui/jquery.easyui.min.js"></script>
-<script type="text/javascript" src="static/js/calendar.js"></script>
+</body>
+<script type="text/javascript" src="../../static/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="../../static/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../../static/js/calendar.js"></script>
 <script type="text/javascript">
     $("input[name=executeTime]").datebox({
         formatter: easyUIFormater,

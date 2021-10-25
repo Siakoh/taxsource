@@ -11,15 +11,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <base href="<%=basePath%>"> 
     <title>任务查询</title>
 
-<link href="static/css/base.css" rel="stylesheet">
-<link rel="stylesheet" href="static/easyui/uimaker/easyui.css">
-<link rel="stylesheet" type="text/css" href="static/easyui/uimaker/icon.css">
+<link href="../../static/css/base.css" rel="stylesheet">
+<link rel="stylesheet" href="../../static/easyui/uimaker/easyui.css">
+<link rel="stylesheet" type="text/css" href="../../static/easyui/uimaker/icon.css">
 
   </head>
-  <script type="text/javascript" src="static/jquery/jquery.min.js"></script>
-  <script type="text/javascript" src="static/easyui/jquery.easyui.min.js"></script>
-  <script type="text/javascript" src="static/easyui/easyui-lang-zh_CN.js"></script>
-  <script type="text/javascript" src="static/js/notice.js"></script>
+  <script type="text/javascript" src="../../static/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="../../static/easyui/jquery.easyui.min.js"></script>
+  <script type="text/javascript" src="../../static/easyui/easyui-lang-zh_CN.js"></script>
+  <script type="text/javascript" src="../../static/js/notice.js"></script>
   <script type="text/javascript">
    /**
     *打开在父窗口中打开window

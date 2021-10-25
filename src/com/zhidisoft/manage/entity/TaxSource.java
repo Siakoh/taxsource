@@ -7,27 +7,27 @@ public class TaxSource {
     private Integer payerId;
     private String taskName;
     private Integer subOrganId;
-    private Integer approvedId;
+    private Integer approverId;
     private Integer executeId;
     private Date executeTime;
     private String taskFrom;
     private String taskState;
     private String idea;
     private Integer riskLevel;
-    private Date recordTaskDate;
+    private String recordTaskDate;
     private Integer recordUserId;
     private Integer removeState;
 
     public TaxSource() {
     }
 
-    public TaxSource(Integer id, Integer payerId, String taskName, Integer subOrganId, Integer approvedId, Integer executeId, Date executeTime, String taskFrom,
-                     String taskState, String idea, Integer riskLevel, Date recordTaskDate, Integer recordUserId, Integer removeState) {
+    public TaxSource(Integer id, Integer payerId, String taskName, Integer subOrganId, Integer approverId, Integer executeId, Date executeTime, String taskFrom,
+                     String taskState, String idea, Integer riskLevel, String recordTaskDate, Integer recordUserId, Integer removeState) {
         this.id = id;
         this.payerId = payerId;
         this.taskName = taskName;
         this.subOrganId = subOrganId;
-        this.approvedId = approvedId;
+        this.approverId = approverId;
         this.executeId = executeId;
         this.executeTime = executeTime;
         this.taskFrom = taskFrom;
@@ -72,12 +72,12 @@ public class TaxSource {
         this.subOrganId = subOrganId;
     }
 
-    public Integer getApprovedId() {
-        return approvedId;
+    public Integer getApproverId() {
+        return approverId;
     }
 
-    public void setApprovedId(Integer approvedId) {
-        this.approvedId = approvedId;
+    public void setApproverId(Integer approverId) {
+        this.approverId = approverId;
     }
 
     public Integer getExecuteId() {
@@ -128,11 +128,11 @@ public class TaxSource {
         this.riskLevel = riskLevel;
     }
 
-    public Date getRecordTaskDate() {
+    public String getRecordTaskDate() {
         return recordTaskDate;
     }
 
-    public void setRecordTaskDate(Date recordTaskDate) {
+    public void setRecordTaskDate(String recordTaskDate) {
         this.recordTaskDate = recordTaskDate;
     }
 
@@ -159,7 +159,7 @@ public class TaxSource {
                 ", payerId=" + payerId +
                 ", taskName='" + taskName + '\'' +
                 ", subOrganId=" + subOrganId +
-                ", approvedId=" + approvedId +
+                ", approverId=" + approverId +
                 ", executeId=" + executeId +
                 ", executeTime=" + executeTime +
                 ", taskFrom='" + taskFrom + '\'' +
