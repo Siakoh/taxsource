@@ -82,7 +82,7 @@ public class UserDao {
     /**
      * 更新密码
      *
-     * @param username    更改密码username
+     * @param username    用户名
      * @param oldPassword 旧的密码
      * @param newPassword 新的密码
      * @return 是否修改成功

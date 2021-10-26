@@ -10,9 +10,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * The type Tax payer dao.
+ */
 public class TaxPayerDao {
     private static TaxPayerDao instance;
+
+    /**
+     * Instantiates a new TaxPayerDao.
+     */
     public TaxPayerDao(){}
+
+    /**
+     * Getinstance TaxPayerDao
+     *
+     * @return the TaxPayerDao
+     */
     public static TaxPayerDao getinstance(){
         if(instance==null){
             instance = new TaxPayerDao();
@@ -20,6 +33,13 @@ public class TaxPayerDao {
         return instance;
     }
 
+    /**
+     * Select payers list.
+     *
+     * @param pageNum the pageNumber
+     * @param size    the size
+     * @return the list
+     */
     public List<TaxPayer> selectPayers(int pageNum, int size){
         ArrayList<TaxPayer> payers = new ArrayList<>();
         String sql = "select * from tb_tax_payer limit ?,?";
@@ -36,19 +56,27 @@ public class TaxPayerDao {
         }
         return payers;
     }
-     public int count(){
+
+    /**
+     * Count int.
+     *
+     * @return the int
+     */
+    public int count(){
         String sql = "select count(id) from tb_tax_payer";
          List<Map<String, String>> list = DBUtil.query(sql);
          int a = Integer.parseInt(list.iterator().next().get("count(id)"));
          return a;
      }
+
     /**
      * 返回查询纳税人的结果集
-     * @param pageNum 页
-     * @param pageSize 页面记录数
+     *
+     * @param pageNum   页
+     * @param pageSize  页面记录数
      * @param payerCode 纳税人编号
      * @param payerName 纳税人姓名
-     * @return 查询的结果
+     * @return 查询的结果 list
      */
     public List<Map<String, String>> getSearchResult(int pageNum,int pageSize,String payerCode,String payerName){
         boolean checkCode = payerCode!=null&&payerCode.toString().length()>0;
@@ -68,17 +96,20 @@ public class TaxPayerDao {
 
     /**
      * 获取所有的记录总数
-     * @return 记录总数
+     *
+     * @return 记录总数 int
      */
     public int getTotalRows(){
         return Integer.parseInt(DBUtil.query("select count(*) c from tb_tax_payer p JOIN tb_industry i join " +
                 "tb_tax_organ o join tb_user u on p.taxOrganId=o.id and p.industryId=i.id and p.userId=u.id ").get(0).get("c"));
     }
+
     /**
      * 获取查询的记录数
+     *
      * @param payerCode 查询纳税人编号
      * @param payerName 查询的纳税人姓名
-     * @return 查询的纳税人局记录数
+     * @return 查询的纳税人局记录数 int
      */
     public int getSearchRows(String payerCode,String payerName){
         boolean checkCode = payerCode!=null&&payerCode.toString().length()>0;
@@ -93,39 +124,49 @@ public class TaxPayerDao {
         List<Map<String, String>> list = DBUtil.query(sql);
         return list.size();
     }
+
     /**
      * 添加纳税人
+     *
      * @param payer 纳税人对象
-     * @return 添加是否成功
+     * @return 添加是否成功 boolean
      */
     public static boolean addPayer(TaxPayer payer){
         int add = DBUtil.add(payer, "tb_tax_payer");
         return add==1;
     }
+
     /**
-     *删除纳税人
+     * 删除纳税人
      * id执行纳税人id
      * 是否删除成功
+     *
+     * @param id the id
+     * @return the boolean
      */
     public static boolean deletePayer(String id){
         String sql = "update tb_tax_payer set removeState=1 where id=?";
         boolean rows = DBUtil.update(sql, id);
         return rows;
     }
+
     /**
      * 更新纳税人
+     *
      * @param payer 传入参数创建的纳税人对象
-     * @param id 执行id
-     * @return 是否更新成功
+     * @param id    执行id
+     * @return 是否更新成功 boolean
      */
     public static boolean updatePayer(TaxPayer payer,Integer id){
         int rows = DBUtil.edit(payer, "tb_tax_payer", id);
         return rows==1;
     }
+
     /**
      * 获取指定id纳税人对象
+     *
      * @param id 指定id
-     * @return 纳税人对象
+     * @return 纳税人对象 tax payer
      */
     public static TaxPayer getPayer(String id){
         Map<String ,String> row = new HashMap<String, String>();
@@ -140,10 +181,12 @@ public class TaxPayerDao {
         }
         return payer;
     }
+
     /**
      * 通过纳税人识别号获取纳税人对象
+     *
      * @param payerCode 纳税人识别号
-     * @return 纳税人对象
+     * @return 纳税人对象 tax payer
      */
     public static TaxPayer getPayerByCode(String payerCode){
         Map<String ,String> row = new HashMap<String, String>();
@@ -161,13 +204,15 @@ public class TaxPayerDao {
         }
         return payer;
     }
+
     /**
      * 获取未被调查的纳税人对象
-     * @param pageNum 页
-     * @param pageSize 页面记录数
+     *
+     * @param pageNum   页
+     * @param pageSize  页面记录数
      * @param payerCode 纳税人编码
      * @param payerName 纳税人姓名
-     * @return
+     * @return list
      */
     public static List<Map<String, String>> getStatistical(int pageNum,int pageSize,String payerCode,String payerName){
         boolean checkCode = payerCode!=null&&payerCode.toString().length()>0;

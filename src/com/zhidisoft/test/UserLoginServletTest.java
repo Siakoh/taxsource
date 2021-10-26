@@ -10,7 +10,6 @@ public class UserLoginServletTest {
     public void test(){
         UserDao userDao = new UserDao();
         User user = userDao.selectName("zhangsan", "25f9e794323b453885f5181f1b624d0b");
-
         System.out.println(user);
     }
 }

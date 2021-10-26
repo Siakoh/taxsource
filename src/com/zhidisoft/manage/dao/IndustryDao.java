@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * The type Industry dao.
+ */
 public class IndustryDao {
 
     private static IndustryDao instance;
@@ -17,6 +20,11 @@ public class IndustryDao {
     private IndustryDao() {
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static IndustryDao getInstance() {
         if (instance == null) {
             instance = new IndustryDao();
@@ -24,12 +32,12 @@ public class IndustryDao {
         return instance;
     }
 
-    /**
-     * 获取所有的行业
-     *
-     * @return 所有的行业对象
-     */
 
+    /**
+     * Gets industrys.
+     *          获取行业的结果集
+     * @return the industrys   返回一个集合
+     */
     public static List<Industry> getIndustrys() {
         List<Industry> industrys = new ArrayList<>();
         String sql = "select * from tb_industry";
@@ -48,10 +56,12 @@ public class IndustryDao {
         return industrys;
     }
 
+
     /**
-     * 根据id获取行业对象
-     * industryId 行业  高效能人事的七个习惯   下一本书
-     * 行业对象   我看过这本书，贼好，好吊
+     * Gets industry.
+     *      根据id获取行业对象
+     * @param industryId the industry id   行业ID
+     * @return the industry   行业对象
      */
     public static Object getIndustry(Integer industryId) {
         String sql = "select * from tb_industry where id = ?";

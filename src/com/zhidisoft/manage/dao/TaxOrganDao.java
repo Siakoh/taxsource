@@ -10,6 +10,9 @@ import org.apache.commons.beanutils.BeanUtils;
 import com.zhidisoft.manage.entity.TaxOrgan;
 import com.zhidisoft.util.DBUtil;
 
+/**
+ * The type Tax organ dao.
+ */
 public class TaxOrganDao {
 
     private static TaxOrganDao instance;
@@ -17,6 +20,11 @@ public class TaxOrganDao {
     private TaxOrganDao() {
     }
 
+    /**
+     * Gets .
+     *
+     * @return the
+     */
     public static TaxOrganDao getinstance() {
         if (instance == null) {
             instance = new TaxOrganDao();
@@ -26,9 +34,9 @@ public class TaxOrganDao {
 
 
     /**
-     * 获取所有的部门
+     * Gets organs.
      *
-     * @return 部门对象集
+     * @return the organs
      */
     public static List<TaxOrgan> getOrgans() {
         List<Map<String, String>> result = DBUtil.query("select * from tb_tax_organ ");
@@ -50,10 +58,10 @@ public class TaxOrganDao {
 
 
     /**
-     * 根据id获取部门
-     *
-     * @param organId 部门id
-     * @return 部门对象
+     * Gets organ.
+     *      根据id查询税务机关
+     * @param organId the organ id  税务机关Id
+     * @return the organ  返回一个税务机关对象
      */
     public static TaxOrgan getOrgan(Integer organId) {
         Map<String, String> map = DBUtil.queryRow("select * from tb_tax_organ where id =?", organId);
@@ -73,7 +81,7 @@ public class TaxOrganDao {
      * 添加部门
      *
      * @param organ 根据表单创建的部门对象
-     * @return 是否添加成功
+     * @return 是否添加成功 boolean
      */
     public static boolean addOrgan(TaxOrgan organ) {
         int rows = DBUtil.add(organ, "tb_tax_organ");
