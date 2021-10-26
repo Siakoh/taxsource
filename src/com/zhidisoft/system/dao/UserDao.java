@@ -25,11 +25,11 @@ public class UserDao {
      * @return the user      返回一个 user 对象
      */
     public User selectName(String username, String password) {
-        String sql = "select id, username,password from tb_user where username=? and password=?";
+        String sql = "select * from tb_user where username=? and password=?";
         List<Map<String, String>> list = DBUtil.query(sql, username, password);
         User user = null;
         for (Map<String, String> map : list) {
-            user = new User(Integer.parseInt(map.get("id")), map.get("username"), map.get("password"));
+            user = new User(Integer.parseInt(map.get("id")), map.get("username"), map.get("password"),Integer.parseInt(map.get("taxerId")),map.get("salt"),Integer.parseInt(map.get("permissionId")),Integer.parseInt(map.get("state")),map.get("email"));
         }
         return user;
 

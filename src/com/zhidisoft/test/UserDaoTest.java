@@ -8,7 +8,7 @@ public class UserDaoTest {
     public void test(){
         UserDao userDao = new UserDao();
 
-        boolean update = userDao.update("zhangsan", "aaaaaaa", "aaaaaaa");
+        boolean update = userDao.update("zhangsan", "aaaaaaaaaa", "aaaaa");
 
         System.out.println(update);
     }

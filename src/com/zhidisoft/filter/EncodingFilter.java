@@ -13,39 +13,36 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * 请求字符编码过滤器
- * @author 卢健良
  *
+ * @author 卢健良
  */
 public class EncodingFilter implements Filter {
-	
-	private String encoding = "UTF-8";
 
-	@Override
-	public void destroy() {
-		
-	}
+    private String encoding = "UTF-8";
 
-	@Override
-	public void doFilter(ServletRequest request, ServletResponse response,
-			FilterChain chain) throws IOException, ServletException {
-		HttpServletRequest httpReq = (HttpServletRequest)request;
-		HttpServletResponse httpResp = (HttpServletResponse)response;
-		
-		httpReq.setCharacterEncoding(encoding);
-		httpResp.setCharacterEncoding(encoding);
-		httpResp.setContentType("text/html; charset="+encoding);
-		
-		chain.doFilter(httpReq, httpResp);
-		
-	}
+    @Override
+    public void destroy() {
 
-	@Override
-	public void init(FilterConfig filterConfig) throws ServletException {
-		String encoding = filterConfig.getInitParameter("encoding");
-		if(encoding!=null && !encoding.isEmpty()){
-			this.encoding = encoding;
-		}
-	}
+    }
 
-	
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response,
+                         FilterChain chain) throws IOException, ServletException {
+        HttpServletRequest httpReq = (HttpServletRequest) request;
+        HttpServletResponse httpResp = (HttpServletResponse) response;
+
+        httpReq.setCharacterEncoding(encoding);
+        httpResp.setCharacterEncoding(encoding);
+        httpResp.setContentType("text/html; charset=" + encoding);
+
+        chain.doFilter(httpReq, httpResp);
+    }
+
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+        String encoding = filterConfig.getInitParameter("encoding");
+        if (encoding != null && !encoding.isEmpty()) {
+            this.encoding = encoding;
+        }
+    }
 }
